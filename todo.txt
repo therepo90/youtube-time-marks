@@ -1,1 +1,1 @@
-wywalic @Marks@ i po prostu zaczytywac normalnie
+remove @Marks@ and read in normal way

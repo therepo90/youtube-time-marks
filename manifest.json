@@ -1,0 +1,15 @@
+{
+    "name": "Inject script",
+    "version": "1.0",
+    "description": "Inject script!",
+    "manifest_version": 2,
+    "permissions": ["activeTab"],
+    "content_scripts": [
+      {
+        "matches": ["https://*.youtube.com/*"],
+        "js": ["main.js"],
+        "run_at": "document_idle",
+        "css": ["styles.css"]
+      }
+    ]
+  }

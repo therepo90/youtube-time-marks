@@ -73,7 +73,6 @@ const appendMarks = chunks => {
           </div>
         `;
   });
-  console.log('children', children);
   container.innerHTML = children;
 };
 

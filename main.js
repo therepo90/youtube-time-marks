@@ -1,5 +1,5 @@
 //chunk: {hours, minutes, seconds}
-//5:27:53
+//percentChunk: {percentPos, label }
 
 console.log('repo-ext-markers init');
 
@@ -35,7 +35,7 @@ const createTimeStamp = secondsSum => chunk => {
 };
 const calcSecondsSum = ({ hours, minutes, seconds }) => seconds + minutes * 60 + hours * 3600;
 const toPercentTime = sum => chunk => {
-  return calcSecondsSum(chunk) / sum;
+  return (calcSecondsSum(chunk) / sum)*100;
 }
 
 const waitMiliseconds = (ms) => {
@@ -56,11 +56,25 @@ const waitForYt = async () => {
   }
 };
 
-const appenMarks = chunks => {
+const appendMarks = chunks => {
+  // append container
   const bar = document.getElementsByClassName('ytp-progress-bar-container')[0];
   const container = document.createElement('div');
   container.classList.add('repo-ext-yt-container');
   bar.appendChild(container);
+
+  // append marks
+  const children = chunks.map(({percentPos, label}) => {
+        return `
+          <div class="repo-ext-yt-mark" style="left: ${percentPos}%">
+            <div class="repo-ext-yt-mark-popup">
+              ${label}
+            </div>
+          </div>
+        `;
+  });
+  console.log('children', children);
+  container.innerHTML = children;
 };
 
 waitForYt().then(() => {

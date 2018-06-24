@@ -2,4 +2,36 @@
     position: absolute;
     top: 0;
     left: 0;
+    height: 100%;
+    width: 100%;
 }
+
+.repo-ext-yt-mark {
+    position: absolute;
+    top: 125%;
+    height: 100%;
+    width: 1%;
+    background-color: yellow;
+    z-index: 100;
+}
+
+.repo-ext-yt-mark:hover .repo-ext-yt-mark-popup{
+    display: flex;
+}
+
+.repo-ext-yt-mark-popup {
+    box-sizing: border-box;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform: translateX(-50%);
+    top: 125%;
+    height: 30px;
+    white-space: nowrap;
+    padding: 5px 10px 5px 10px;
+    background-color: yellow;
+    color: black;
+    z-index: 1;
+}
+

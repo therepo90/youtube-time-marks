@@ -1,7 +1,7 @@
 //chunk: {hours, minutes, seconds}
 //percentChunk: {percentPos, label }
 
-console.log('repo-ext-markers init');
+console.log('Youtube time markers chrome extension running.');
 
 const extractTime = timeStr => {
   let hours;
@@ -84,7 +84,6 @@ waitForYt().then(() => {
   const { hours, minutes, seconds } = extractTime(durationStr);
 
 
-  console.log('time', hours, minutes, seconds);
 
   const secondsSum = calcSecondsSum({
     hours,
@@ -93,14 +92,26 @@ waitForYt().then(() => {
   });
   // TODO extract chunks from description
   const desc = document.getElementById('description').innerText;
-  console.log(desc);
-  const chunksStrings = [{
-    at: '2:40:00',
-    label: 'Sample label' 
-  }];
+  const regexp = /@Marks@\s*([\s\S]*)@Marks-end@/;
+  if(!regexp.test(desc)) {
+    throw new Error("Description doesnt match marks regexp");
+  }
+  const lines = regexp.exec(desc)[1].split('\n');
+  lines.length--; // remove last empty \n element
+  const chunksStrings = lines.map(line => {
+    const lineRegExp = /\s*([\w:]+)\s.*?(.*)/;
+    if(!lineRegExp.test(line)){
+      throw new Error("Line doesnt meet regexp:" + line);
+    }
+    const matches = lineRegExp.exec(line);
+    return {
+      at: matches[1].trim(),
+      label: matches[2].trim()
+    };
+  });
 
   const percentChunks = chunksStrings.map(createTimeStamp(secondsSum));
-  console.log('chunks', percentChunks);
+  
 
   appendMarks(percentChunks);
 });

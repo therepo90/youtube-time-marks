@@ -25,7 +25,6 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: translateX(-50%);
     top: 125%;
     height: 30px;
     white-space: nowrap;

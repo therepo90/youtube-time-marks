@@ -89,14 +89,14 @@ waitForYt().then(() => {
     minutes,
     seconds
   });
-  // TODO extract chunks from description
   const desc = document.getElementById('description').innerText;
-  const regexp = /@Marks@\s*([\s\S]*)@Marks-end@/;
-  if(!regexp.test(desc)) {
-    throw new Error("Description doesnt match marks regexp");
+  const regexp = /(\d\d:\d\d:\d\d.*)/gm;
+  
+  let lines = [];
+  let line = [];
+  while( (line = regexp.exec(desc)) !==null) {
+    lines = [...lines, line[1]];
   }
-  const lines = regexp.exec(desc)[1].split('\n');
-  lines.length--; // remove last empty \n element
   const chunksStrings = lines.map(line => {
     const lineRegExp = /\s*([\w:]+)\s.*?(.*)/;
     if(!lineRegExp.test(line)){

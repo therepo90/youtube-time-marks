@@ -9,10 +9,11 @@
 .repo-ext-yt-mark {
     position: absolute;
     top: 125%;
-    height: 100%;
+    padding-top: 1%; /* height match width */
     width: 1%;
     background-color: yellow;
     z-index: 100;
+    border-radius: 50%;
 }
 
 .repo-ext-yt-mark:hover .repo-ext-yt-mark-popup{
@@ -21,12 +22,14 @@
 
 .repo-ext-yt-mark-popup {
     box-sizing: border-box;
+    font-family: monospace;
     display: none;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 125%;
-    height: 30px;
+    font-size: 12px;
+    height: 20px;
     white-space: nowrap;
     padding: 5px 10px 5px 10px;
     background-color: yellow;

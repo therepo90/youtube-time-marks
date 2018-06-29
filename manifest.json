@@ -3,7 +3,10 @@
     "version": "0.0.1",
     "description": "Reads youtube description and creates video time marks.",
     "manifest_version": 2,
-    "permissions": ["activeTab"],
+    "permissions": ["activeTab", "tabs"],
+    "background": {
+      "scripts":["background.js"]
+    },
     "content_scripts": [
       {
         "matches": ["https://*.youtube.com/watch*"],
